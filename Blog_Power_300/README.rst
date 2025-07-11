@@ -1,8 +1,8 @@
 .. _Power optimization Blog for nRF5340:
 
 
-Bluetooth: Peripheral UART 
-##########################
+Bluetooth: Peripheral UART with added Power Optimization
+#######################################################
 
 .. contents::
    :local:
