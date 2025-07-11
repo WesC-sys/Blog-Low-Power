@@ -1,0 +1,44 @@
+/*
+ * Copyright (c) 2022 Nordic Semiconductor ASA
+ *
+ * SPDX-License-Identifier: LicenseRef-Nordic-5-Clause
+ */
+
+/ {
+	chosen {
+		nordic,nus-uart = &uart0;
+	};
+
+		buttons {
+		compatible = "gpio-keys";
+
+		button1: button_1 {
+			gpios = <&gpio0 24 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+			label = "Push button 2";
+			//wakeup-source;
+			zephyr,code = <INPUT_KEY_1>;
+		};
+
+	};
+
+	/* These aliases are provided for compatibility with samples */
+	aliases {
+		sw1 = &button1;
+	};
+
+};
+
+// DK Pin out for Switches
+// sw0 p0.23
+// sw1 p0.24
+// sw2 p0.08
+// sw3 p0.09
+//It controls which GPIO pins use the hardware "sense" mechanism for edge detection, 
+//enabling the use of GPIOTE PORT events instead of dedicated GPIOTE IN channels.
+//The hardware sense mechanism is specifically designed for low-power operation, especially in sleep modes. 
+//When using the sense mechanism, the device can remain in a low-power state and still detect pin changes, 
+//whereas using GPIOTE IN channels requires more active hardware resources, which increases current consumption 
+&gpio0 {
+    sense-edge-mask = <0x01800000>; /* 1<<24 | 1 <<23 */
+};
+
